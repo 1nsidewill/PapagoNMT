@@ -16,8 +16,8 @@ if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000, debug=True)
 
 # 환경변수로 관리하기를 추천
-client_id = "llfgzt4ywp" # 개발자센터에서 발급받은 Client ID 값
-client_secret = "3JyuSDXPWGNyXH5mxizf5T6HFBMJp32Id0O4qWA3" # 개발자센터에서 발급받은 Client Secret 값
+client_id = "" # 개발자센터에서 발급받은 Client ID 값
+client_secret = "" # 개발자센터에서 발급받은 Client Secret 값
 
 # 시작 페이지를 docs로 변경
 @app.get("/")
