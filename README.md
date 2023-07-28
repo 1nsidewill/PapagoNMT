@@ -19,7 +19,6 @@ This project's purpose is to create a make Repository with a collection of defau
 ## Overview
 <!-- Write Overview about this project -->
 **Naver Cloud Platform 의 Papago Translation API 를 사용한 Text & Document Translation**
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d522a973-4f63-47d5-af53-8a1f9fa91657/Untitled.png)
 
 ## Getting Started
 <!--
