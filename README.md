@@ -1,5 +1,6 @@
 # PapagoNMT
 PapagoNMT API Demo
+https://www.notion.so/codewill/Papago-Translation-e99d337e32ac4668a5ff44e79f420133?pvs=4
 
 ## Index
   - [Overview](#overview) 
@@ -17,13 +18,8 @@ This project's purpose is to create a make Repository with a collection of defau
 
 ## Overview
 <!-- Write Overview about this project -->
-**If you use this template, you can use this function**
-- Issue Template
-- Pull Request Template
-- Commit Template
-- Readme Template
-- Contribute Template
-- Pull Request Build Test(With Github Actions)
+**Naver Cloud Platform 의 Papago Translation API 를 사용한 Text & Document Translation**
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d522a973-4f63-47d5-af53-8a1f9fa91657/Untitled.png)
 
 ## Getting Started
 <!--
