@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 import os
 import sys
 import urllib.request
@@ -7,19 +7,22 @@ import uvicorn
 import requests
 from requests_toolbelt import MultipartEncoder
 import uuid
-
+import json
 
 app = FastAPI()
 
+# Run Python file Via FastAPI
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000, debug=True)
 
+# 환경변수로 관리하기를 추천
 client_id = "llfgzt4ywp" # 개발자센터에서 발급받은 Client ID 값
 client_secret = "3JyuSDXPWGNyXH5mxizf5T6HFBMJp32Id0O4qWA3" # 개발자센터에서 발급받은 Client Secret 값
 
+# 시작 페이지를 docs로 변경
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return RedirectResponse(url='/docs')
 
 @app.get("/translate_en_to_kr")
 async def translate_en_to_kr(input_text):
@@ -49,7 +52,7 @@ def translate(source, target, input_text):
         print("Error Code:" + rescode)
 
 @app.post("/document_translate")
-def document_translate(file_dir):
+def document_translate():
     data = {
     'source': 'ko',
     'target': 'en',
@@ -65,7 +68,7 @@ def document_translate(file_dir):
 
     url = "https://naveropenapi.apigw.ntruss.com/doc-trans/v1/translate"
     res = requests.post(url, headers=headers, data=m.to_string())
-    print(res.text)
+    return(res.text)
 
 
 @app.get("/document_translate_status")
@@ -77,14 +80,21 @@ def document_translate_status(request_id):
 
     url = "https://naveropenapi.apigw.ntruss.com/doc-trans/v1/status?requestId=" + request_id
     res = requests.get(url, headers=headers)
-    print(res.text)
+    return(res.text)
 
 @app.get("/download_translated_document")
 def download_translated_document(request_id):
-    url = "https://naveropenapi.apigw.ntruss.com/doc-trans/v1/download?requestId=" + request_id
+    data = json.loads(document_translate_status(request_id))
+    if (data['data']['status'] == "COMPLETE"):
+        url = "https://naveropenapi.apigw.ntruss.com/doc-trans/v1/download?requestId=" + request_id
 
-    opener = urllib.request.build_opener()
-    opener.addheaders = [('X-NCP-APIGW-API-KEY-ID', client_id), ('X-NCP-APIGW-API-KEY', client_secret)]
-    urllib.request.install_opener(opener)
-
-    urllib.request.urlretrieve(url, "b.docx")
+        opener = urllib.request.build_opener()
+        opener.addheaders = [('X-NCP-APIGW-API-KEY-ID', client_id), ('X-NCP-APIGW-API-KEY', client_secret)]
+        urllib.request.install_opener(opener)
+        try:
+            urllib.request.urlretrieve(url, "b.docx")
+            return 'File Download Complete'
+        except Exception as e:
+            return ('Error', str(e))
+    else:
+        return 'Not Yet Translated'
