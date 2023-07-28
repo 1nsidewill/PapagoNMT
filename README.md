@@ -26,7 +26,6 @@ This project's purpose is to create a make Repository with a collection of defau
 - Pull Request Build Test(With Github Actions)
 
 ## Getting Started
-**click `Use this template` and use this template!**
 <!--
 ### Depencies
  Write about need to install the software and how to install them 
@@ -43,9 +42,9 @@ And repeat
 
     until finished
 -->
-1. Click `Use this template` button 
-2. Create New Repository
-3. Update Readme and Others(Other features are noted in comments.)
+1. Clone this repository
+2. pip install -r requirements.txt
+3. Debug with FastAPI
 <!--
 ## Deployment
  Add additional notes about how to deploy this on a live system
