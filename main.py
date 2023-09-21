@@ -69,7 +69,7 @@ def document_translate():
     url = "https://naveropenapi.apigw.ntruss.com/doc-trans/v1/translate"
     res = requests.post(url, headers=headers, data=m.to_string())
     return(res.text)
-
+    
 
 @app.get("/document_translate_status")
 def document_translate_status(request_id):
@@ -98,3 +98,7 @@ def download_translated_document(request_id):
             return ('Error', str(e))
     else:
         return 'Not Yet Translated'
+
+@app.get("/Naverworks_SAML")
+def Naverworks_SAML(SAMLResponse):
+    print(SAMLResponse)
